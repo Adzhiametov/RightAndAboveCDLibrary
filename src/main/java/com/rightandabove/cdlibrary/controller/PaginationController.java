@@ -2,7 +2,7 @@ package com.rightandabove.cdlibrary.controller;
 
 import com.rightandabove.cdlibrary.entity.Catalog;
 import com.rightandabove.cdlibrary.entity.CompactDisc;
-import com.rightandabove.cdlibrary.io.XMLReader;
+import com.rightandabove.cdlibrary.io.XMLReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class PaginationController {
     private static String relativeDestinationPath = "/WEB-INF/catalog/catalog.xml";
 
     @Autowired
-    XMLReader<Catalog> xmlReader;
+    XMLReadWriteAccess<Catalog> xmlReadWriteAccess;
     @Autowired
     ServletContext servletContext;
 
@@ -39,7 +39,7 @@ public class PaginationController {
     public String handleRequest(@PathVariable(value = "page") String page, HttpServletRequest request, Model model) throws Exception {
         PagedListHolder listHolder;
         if (page.equals(FIRST)) {
-            Set<CompactDisc> discsSet = xmlReader.readFromFile(servletContext.getRealPath(relativeDestinationPath), Catalog.class).getCds();
+            Set<CompactDisc> discsSet = xmlReadWriteAccess.readFromFile(servletContext.getRealPath(relativeDestinationPath), Catalog.class).getCds();
             listHolder = new PagedListHolder(new ArrayList(discsSet));
             listHolder.setPageSize(ITEMS_ON_PAGE);
             request.getSession().setAttribute(HOLDER_KEY, listHolder);
