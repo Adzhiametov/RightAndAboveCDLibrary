@@ -8,6 +8,8 @@
 
     <context:component-scan base-package="com.rightandabove.cdlibrary"/>
     <mvc:annotation-driven/>
+    <mvc:resources mapping="/resources/css/**" location="/resources/css/"/>
+    <mvc:resources mapping="/resources/js/**" location="/resources/js/"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>

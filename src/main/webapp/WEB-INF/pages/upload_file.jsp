@@ -1,38 +1,39 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <script type="text/javascript" src="jquery-1.2.6.min.js"></script>
-    <title>Upload File</title>
-</head>
-<body>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<h3>Please select a file to upload !</h3>
+<t:genericpage>
 
-<form:form method="post" enctype="multipart/form-data"
-           modelAttribute="uploadedFile" action="fileUpload">
-    <table>
-        <tr>
-            <td>Upload File: </td>
-            <td><input type="file" name="file"/>
-            </td>
-            <td style="color: red; font-style: italic;">
-                <form:errors path="file"/>
-            </td>
-        </tr>
-        <tr>
-            <td> </td>
-            <td><input type="submit" value="Upload"/>
-            </td>
-            <td> </td>
-        </tr>
-    </table>
+    <jsp:attribute name="headerTitle">
+            <h1>Upload</h1>
+    </jsp:attribute>
 
-    <a href="<c:url value="show/first"/>">Show catalog</a>
-    <a href="<c:url value="/gotodownload"/>">Download catalog</a>
+    <jsp:body>
 
-</form:form>
+        <h3>Please select a file to upload !</h3>
+        </br>
 
-</body>
-</html>
+        <form:form method="post" enctype="multipart/form-data"
+                   modelAttribute="uploadedFile" action="fileUpload">
+            <table class="center-block">
+                <tr>
+                    <td width="50%">
+                        <input type="file" name="file"/>
+                    </td>
+                    <td width="50%" style="color: red; font-style: italic; text-align: right">
+                        <form:errors path="file"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="50%"><input type="submit" class="btn btn-primary" value="Upload"/></td>
+                    <td width="50%"></td>
+                </tr>
+            </table>
+
+        </form:form>
+
+    </jsp:body>
+</t:genericpage>
+

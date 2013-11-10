@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Set;
 public class Catalog {
 
     @XmlElement(name = "CD", type = CompactDisc.class)
-    private Set<CompactDisc> cds;
+    private Set<CompactDisc> cds = new HashSet<CompactDisc>();
 
     public Set<CompactDisc> getCds() {
         return cds;

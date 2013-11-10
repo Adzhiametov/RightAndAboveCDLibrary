@@ -16,25 +16,22 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 @Service
 public class ConcurrentResourceModifier {
 
-    final private static ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-    private Lock lock = readWriteLock.writeLock();
-
     @Autowired
     XMLReadWriteAccess<Catalog> xmlReadWriteAccess;
 
-    public void readUpdateWrite(Catalog newCatalog, String filePath){
-        lock.lock();
-        Catalog oldCatalog = xmlReadWriteAccess.readFromFile(filePath, Catalog.class);
+    private Lock lock = new ReentrantReadWriteLock().writeLock();
+
+    public void readUpdateWrite(Catalog newCatalog, String filePath) {
         try {
-            Thread.sleep(14000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            lock.lock();
+            Catalog oldCatalog = xmlReadWriteAccess.readFromFile(filePath, Catalog.class);
+            Set<CompactDisc> cds = newCatalog.getCds();
+            cds.addAll(oldCatalog.getCds());
+            newCatalog.setCds(cds);
+            xmlReadWriteAccess.saveToFile(newCatalog, filePath);
+        } finally {
+            lock.unlock();
         }
-        Set<CompactDisc> cds = newCatalog.getCds();
-        cds.addAll(oldCatalog.getCds());
-        newCatalog.setCds(cds);
-        xmlReadWriteAccess.saveToFile(newCatalog, filePath);
-        lock.unlock();
     }
 
 
