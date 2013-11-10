@@ -39,7 +39,8 @@ public class PaginationController {
     public String handleRequest(@PathVariable(value = "page") String page, HttpServletRequest request, Model model) throws Exception {
         PagedListHolder listHolder;
         if (page.equals(FIRST)) {
-            Set<CompactDisc> discsSet = xmlReadWriteAccess.readFromFile(servletContext.getRealPath(relativeDestinationPath), Catalog.class).getCds();
+            Catalog catalog = xmlReadWriteAccess.readFromFile(servletContext.getRealPath(relativeDestinationPath), Catalog.class);
+            Set<CompactDisc> discsSet = catalog.getCds();
             listHolder = new PagedListHolder(new ArrayList(discsSet));
             listHolder.setPageSize(ITEMS_ON_PAGE);
             request.getSession().setAttribute(HOLDER_KEY, listHolder);
