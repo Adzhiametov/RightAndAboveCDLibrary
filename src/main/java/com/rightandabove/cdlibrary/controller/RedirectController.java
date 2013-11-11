@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class RedirectController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/gotoupload", method = RequestMethod.GET)
     public String goToUploadFilePage() {
-        return "upload_file";
+        return "upload";
     }
 
     @RequestMapping(value = "/gotodownload", method = RequestMethod.GET)
     public String goToDownloadFilePage() {
-        return "download_file";
+        return "download";
     }
 }

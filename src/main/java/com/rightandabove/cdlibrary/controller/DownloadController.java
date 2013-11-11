@@ -1,6 +1,5 @@
 package com.rightandabove.cdlibrary.controller;
 
-import com.rightandabove.cdlibrary.IOConstants;
 import com.rightandabove.cdlibrary.service.HelperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,13 +12,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import static com.rightandabove.cdlibrary.IOConstants.BUFFER_SIZE;
-
 /**
  * Created by Arsen Adzhiametov on 11/6/13 in IntelliJ IDEA.
  */
 @Controller
 public class DownloadController {
+
+    public static final int BUFFER_SIZE = 4096;
 
     @Autowired
     HelperService helperService;
@@ -29,7 +28,7 @@ public class DownloadController {
         File downloadFile = new File(helperService.getXmlFilePath());
         FileInputStream inputStream = new FileInputStream(downloadFile);
 
-        helperService.prepeareResponse(response, downloadFile);
+        helperService.prepareResponse(response, downloadFile);
 
         OutputStream outStream = response.getOutputStream();
         byte[] buffer = new byte[BUFFER_SIZE];

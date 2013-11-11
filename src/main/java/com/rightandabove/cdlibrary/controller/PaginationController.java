@@ -45,8 +45,8 @@ public class PaginationController {
         } else {
             listHolder = (PagedListHolder) request.getSession().getAttribute(HOLDER_KEY);
             if (listHolder == null) {
-                model.addAttribute("message", "Something goes wrong. Please start over again.");
-                return "show_file";
+                model.addAttribute("message", "something.goes.wrong.please.start.over.again");
+                return "show";
             }
             if (NEXT.equals(page)) {
                 listHolder.nextPage();
@@ -55,7 +55,7 @@ public class PaginationController {
             }
         }
         model.addAttribute("listHolder", listHolder);
-        return "show_file";
+        return "show";
     }
 }
 

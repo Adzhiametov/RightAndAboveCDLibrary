@@ -36,17 +36,17 @@ public class UploadController {
         MultipartFile file = uploadedFile.getFile();
         fileValidator.validate(uploadedFile, result);
         if (result.hasErrors()) {
-            return "upload_file";
+            return "upload";
         }
         Catalog newCatalog;
         try {
             newCatalog = xmlReadWriteAccess.readFromStream(file.getInputStream(), Catalog.class);
         } catch (IOException e) {
             e.printStackTrace();
-            result.rejectValue("file", "uploadForm.selectFile", "Something goes wrong");
-            return "upload_file";
+            result.rejectValue("file", "something.goes.wrong");
+            return "upload";
         }
-        concurrentResourceReadWriter.readUpdateWrite(newCatalog, helperService.getXmlFilePath());
+        concurrentResourceReadWriter.updateCatalog(newCatalog, helperService.getXmlFilePath());
         return "redirect:show/first";
     }
 

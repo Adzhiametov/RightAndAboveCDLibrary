@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by Arsen Adzhiametov on 11/9/13 in IntelliJ IDEA.
@@ -19,9 +19,9 @@ public class ConcurrentResourceReadWriter {
     @Autowired
     XMLReadWriteAccess<Catalog> xmlReadWriteAccess;
 
-    private Lock lock = new ReentrantReadWriteLock().writeLock();
+    private Lock lock = new ReentrantLock();
 
-    public void readUpdateWrite(Catalog newCatalog, String filePath) {
+    public void updateCatalog(Catalog newCatalog, String filePath) {
         try {
             lock.lock();
             Catalog oldCatalog = xmlReadWriteAccess.readFromFile(filePath, Catalog.class);

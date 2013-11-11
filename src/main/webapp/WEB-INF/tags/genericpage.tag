@@ -6,7 +6,7 @@
 <head>
     <title>CDLib</title>
     <link href="<c:url value='/resources/css/bootstrap.css' />" rel="stylesheet" type="text/css"/>
-    <script src="<c:url value="/resources/js/bootstrap.js"/>"type="text/javascript"></script>
+    <script src="<c:url value="/resources/js/bootstrap.js"/>" type="text/javascript"></script>
     <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -16,7 +16,7 @@
     <!--Header section-->
     <div class="header">
         <ul class="nav nav-tabs" id="myTab">
-            <li><a href="<c:url value="/"/>" data-toggle="tab">Upload</a></li>
+            <li><a href="<c:url value="/gotoupload"/>" data-toggle="tab">Upload</a></li>
             <li><a href="<c:url value="/show/first"/>" data-toggle="tab">Library</a></li>
             <li><a href="<c:url value="/gotodownload"/>" data-toggle="tab">Download</a></li>
         </ul>

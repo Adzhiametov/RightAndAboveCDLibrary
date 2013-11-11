@@ -1,5 +1,7 @@
 package com.rightandabove.cdlibrary.io;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBContext;
@@ -15,6 +17,8 @@ import java.io.InputStream;
 @Service
 public class XMLReadWriteAccess<T> {
 
+    static final Logger LOG = LoggerFactory.getLogger(XMLReadWriteAccess.class);
+
     public T readFromFile(String filePath, Class<T> clas) {
         T object = null;
         JAXBContext context = null;
@@ -25,6 +29,7 @@ public class XMLReadWriteAccess<T> {
             object = (T) unMarshaller.unmarshal(new File(filePath));
         } catch (JAXBException e) {
             e.printStackTrace();
+            LOG.error("Exception " + e);
         }
         return object;
     }
@@ -39,6 +44,7 @@ public class XMLReadWriteAccess<T> {
             object = (T) unMarshaller.unmarshal(inputStream);
         } catch (JAXBException e) {
             e.printStackTrace();
+            LOG.error("Exception " + e);
         }
         return object;
     }
@@ -53,6 +59,7 @@ public class XMLReadWriteAccess<T> {
             marshaller.marshal(object, new File(destinationFilePath));
         } catch (JAXBException e) {
             e.printStackTrace();
+            LOG.error("Exception " + e);
         }
     }
 }
