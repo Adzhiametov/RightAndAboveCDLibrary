@@ -23,6 +23,7 @@
                     </td>
                     <td width="50%" style="color: red; font-style: italic; text-align: right">
                         <form:errors path="file"/>
+                        ${errors}
                     </td>
                 </tr>
 
