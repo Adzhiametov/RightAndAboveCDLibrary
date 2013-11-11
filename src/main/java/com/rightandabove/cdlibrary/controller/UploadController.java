@@ -3,7 +3,8 @@ package com.rightandabove.cdlibrary.controller;
 import com.rightandabove.cdlibrary.entity.Catalog;
 import com.rightandabove.cdlibrary.io.XMLReadWriteAccess;
 import com.rightandabove.cdlibrary.model.UploadedFile;
-import com.rightandabove.cdlibrary.service.ConcurrentResourceModifier;
+import com.rightandabove.cdlibrary.service.ConcurrentResourceReadWriter;
+import com.rightandabove.cdlibrary.service.HelperService;
 import com.rightandabove.cdlibrary.validator.FileValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import java.io.IOException;
 
 /**
@@ -27,14 +27,12 @@ public class UploadController {
     @Autowired
     XMLReadWriteAccess<Catalog> xmlReadWriteAccess;
     @Autowired
-    ServletContext servletContext;
+    HelperService helperService;
     @Autowired
-    ConcurrentResourceModifier concurrentResourceModifier;
-
-    private static String relativeDestinationPath = "/WEB-INF/catalog/catalog.xml";
+    ConcurrentResourceReadWriter concurrentResourceReadWriter;
 
     @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
-    public String uploadFile(@ModelAttribute("uploadedFile")UploadedFile uploadedFile, BindingResult result) {
+    public String uploadFile(@ModelAttribute("uploadedFile") UploadedFile uploadedFile, BindingResult result) {
         MultipartFile file = uploadedFile.getFile();
         fileValidator.validate(uploadedFile, result);
         if (result.hasErrors()) {
@@ -48,11 +46,9 @@ public class UploadController {
             result.rejectValue("file", "uploadForm.selectFile", "Something goes wrong");
             return "upload_file";
         }
-        concurrentResourceModifier.readUpdateWrite(newCatalog, getFilePath());
+        concurrentResourceReadWriter.readUpdateWrite(newCatalog, helperService.getXmlFilePath());
         return "redirect:show/first";
     }
 
-    private String getFilePath() {
-        return servletContext.getRealPath(relativeDestinationPath);
-    }
+
 }
