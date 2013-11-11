@@ -10,7 +10,7 @@
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/css/**" location="/resources/css/"/>
     <mvc:resources mapping="/resources/js/**" location="/resources/js/"/>
-    <context:property-placeholder location="classpath:files.path.properties" />
+    <context:property-placeholder location="classpath:files.path.properties"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
@@ -18,11 +18,11 @@
     </bean>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="5000000"/>
+        <property name="maxUploadSize" value="10000000"/>
     </bean>
 
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="WEB-INF/classes/messages" />
+        <property name="basename" value="WEB-INF/classes/messages"/>
     </bean>
 </beans>
