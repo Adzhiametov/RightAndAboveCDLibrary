@@ -15,6 +15,8 @@ import java.io.IOException;
 
 /**
  * Created by Arsen Adzhiametov on 11/5/13 in IntelliJ IDEA.
+ *
+ * Class provide XML validation via XSD.
  */
 public class XMLValidation {
 

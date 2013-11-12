@@ -4,6 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by Arsen Adzhiametov on 11/5/13 in IntelliJ IDEA.
+ *
+ * Model for spring form. Serves like DTO.
  */
 public class UploadedFile {
 

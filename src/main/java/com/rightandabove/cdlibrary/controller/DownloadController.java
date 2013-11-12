@@ -14,6 +14,10 @@ import java.io.OutputStream;
 
 /**
  * Created by Arsen Adzhiametov on 11/6/13 in IntelliJ IDEA.
+ *
+ * Traditional simple controller for downloading file.
+ * But I think in this controller I have to do file
+ * reading synchronized with file modification.
  */
 @Controller
 public class DownloadController {

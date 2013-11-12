@@ -2,7 +2,6 @@ package com.rightandabove.cdlibrary.service;
 
 import com.rightandabove.cdlibrary.entity.Catalog;
 import com.rightandabove.cdlibrary.entity.CompactDisc;
-import com.rightandabove.cdlibrary.io.XMLReadWriteAccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +11,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by Arsen Adzhiametov on 11/9/13 in IntelliJ IDEA.
+ *
+ * Service for concurrent modification of target file.
  */
 @Service
 public class ConcurrentResourceReadWriter {

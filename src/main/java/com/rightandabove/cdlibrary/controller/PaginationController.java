@@ -2,7 +2,7 @@ package com.rightandabove.cdlibrary.controller;
 
 import com.rightandabove.cdlibrary.entity.Catalog;
 import com.rightandabove.cdlibrary.entity.CompactDisc;
-import com.rightandabove.cdlibrary.io.XMLReadWriteAccess;
+import com.rightandabove.cdlibrary.service.XMLReadWriteAccess;
 import com.rightandabove.cdlibrary.service.HelperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -18,6 +18,13 @@ import java.util.Set;
 
 /**
  * Created by Arsen Adzhiametov on 11/7/13 in IntelliJ IDEA.
+ *
+ * PaginationController uses PagedListHolder to provide fake pagination.
+ * If this is the first call, the file is read, parsed and list of objects placed in the session
+ * via PageListHolder. If this is not first call, list of cd's pulled out of the
+ * session and nextPage or prevPage methods called.
+ * When working with large files, we can to do lazy loading of the file.
+ * There are few approaches to do this trick.
  */
 @Controller
 public class PaginationController {

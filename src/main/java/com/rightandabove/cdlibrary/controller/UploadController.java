@@ -1,7 +1,7 @@
 package com.rightandabove.cdlibrary.controller;
 
 import com.rightandabove.cdlibrary.entity.Catalog;
-import com.rightandabove.cdlibrary.io.XMLReadWriteAccess;
+import com.rightandabove.cdlibrary.service.XMLReadWriteAccess;
 import com.rightandabove.cdlibrary.model.UploadedFile;
 import com.rightandabove.cdlibrary.service.ConcurrentResourceReadWriter;
 import com.rightandabove.cdlibrary.service.HelperService;
@@ -64,6 +64,15 @@ public class UploadController implements HandlerExceptionResolver {
         return "redirect:show/first";
     }
 
+    /**
+     * This method implemented for handling MaxUploadSizeExceededException.
+     * But in not provide target functionality. The big size file is uploaded and then
+     * validated on size restriction set in in spring context. This is not good.
+     * Suppose I load a file size of 5 Gb. The answer will come with an error
+     * when the file is completely uploaded. It will take a very long time.
+     *
+     * So I made another additional check on the client side using javascript.
+     */
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception exception) {
         Map<Object, Object> model = new HashMap<Object, Object>();
